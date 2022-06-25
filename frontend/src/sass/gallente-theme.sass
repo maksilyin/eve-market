@@ -1,0 +1,158 @@
+$color_base: #131E21
+$color_base_light: #182B2C
+$color_base_light_hover: #1F3C3A
+$color_base_dark: #0B1214
+$color_border: #131F22
+$color_list: #B1B9C1
+$color_active: #B9E9DD
+$color_border2: #1B3332
+$color_row_hover: #162728
+$color_scrollbar: #3E5251
+$color_white: #ffffff
+    
+.gallente-theme
+    .header
+        border-bottom: 2px solid $color_border2
+        nav
+            background: $color_base
+            a
+                .active
+                    color: $color_active
+                &:hover
+                    color: $color_active
+            .mobile
+                &-menu
+                    background: $color_base
+                    li
+                        background: $color_base_light
+                    a, i
+                        color: $color_list
+    .sidebar 
+        background: $color_base
+        &::-webkit-scrollbar-track
+            background: $color_base_dark
+        &::-webkit-scrollbar-thumb
+            background: $color_scrollbar
+    .group-list
+        background: $color_base
+        &__item
+            border-color: $color_border
+            color: $color_list
+            background: $color_base_light
+        &__title
+            background: $color_base_light
+            &:hover
+                background: $color_base_light_hover
+        &__dropdown
+            ul 
+                li
+                    background: $color_base
+            .group-list__title
+                background: $color_base
+                &:hover
+                    background: $color_base_light_hover
+    .main 
+        background: $color_base
+    .content 
+        color: $color_list
+        .caret
+            > path:first-child
+                fill: $color_list
+    .tab
+        &-nav
+            span
+                &.active, &:hover
+                    color: $color_active
+                    background: $color_base_light_hover
+    .orders-table
+        tr
+            background: $color_base_dark
+            &.active, &:hover
+                background: $color_row_hover
+        th, td
+            border-color: $color_border2
+
+    .select
+        &__trigger
+            &:hover
+                color: $color_active
+        &__dropdown
+            background: $color_base
+            border: 1px solid $color_scrollbar
+            input[type="checkbox"]
+            label
+                span
+                    color: $color_white
+
+    div, ul
+        &::-webkit-scrollbar-track
+            background: $color_base_dark
+        &::-webkit-scrollbar-thumb
+            background: $color_scrollbar
+    .market-info
+        > div 
+            border-color: $color_border2
+    .order-profit
+        &__trigger
+            background: $color_base_light
+            &:hover
+                background: $color_base_light_hover
+        &__dropdown
+            background: $color_base
+            border-top: 1px solid $color_border2
+            margin: 0 -1px
+            > div 
+                border: 1px solid $color_border2
+                transition: all .3s
+                &:hover
+                    background: $color_base_light_hover
+    .input-group
+        input[type='text'], input[type='number']
+            border-color: $color_border2
+            background: $color_base_dark
+            color: $color_list
+            &::-webkit-input-placeholder
+                opacity: 0.5
+            &:-moz-placeholder
+                opacity: 0.5
+            &::placeholder 
+                opacity: 0.5
+            &:focus
+                border-bottom: 1px solid $color_border2
+                box-shadow: unset
+        label
+            color: $color_white
+    [type="checkbox"].filled-in
+        &:not(:checked) + span:not(.lever):after
+            border: 1px solid $color_border2
+            background: $color_base_dark
+        &:checked + span:not(.lever)
+            &:after
+                border: 1px solid $color_border2
+                background: $color_base_dark
+            &:before
+                border-right-color: $color_active
+                border-bottom-color: $color_active
+    label
+        &.checkbox
+            color: $color_list
+            &:hover
+                color: $color_active
+    .selected-type
+        &__description
+            background: $color_base
+            border-color: $color_border2
+    .modal
+        background-color: $color_base-light
+        border: 1px solid $color_border2
+        &-header
+            border-bottom: 1px solid $color_border
+        &-footer
+            background-color: $color_base-light
+    .lang
+        &-dropdown
+            background: $color_base
+            box-shadow: inset 0 0 0 1px $color_border2
+            a
+                line-height: 50px
+

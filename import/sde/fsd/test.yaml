@@ -1,0 +1,23 @@
+0:
+    groupID: 0
+    mass: 1.0
+    name:
+        de: '#System'
+        en: '#System'
+        fr: '#Système'
+        ja: '#システム'
+        ru: '#Система'
+        zh: '#星系'
+    portionSize: 1
+    published: false
+2:
+    groupID: 2
+    name:
+        de: Corporation
+        en: Corporation
+        fr: Corporation
+        ja: コーポレーション
+        ru: Corporation
+        zh: 军团
+    portionSize: 1
+    published: false

@@ -1,0 +1,379 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+    -webkit-appearance: none
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus
+    appearance: none
+    -moz-appearance: textfield
+
+
+.App
+    display: flex
+    flex-direction: column
+    height: 100vh
+.main
+    display: grid
+    grid-template-rows: 100%
+    grid-template-columns: auto 1fr
+    flex-grow: 1
+    overflow: hidden
+.sidebar
+    max-height: 100%
+    display: flex
+    flex-direction: column
+    width: 350px
+    @media ($smPlus)
+    &-trigger
+        position: absolute
+        @media ($smPlus)
+            display: none
+    &.sidenav
+        padding-bottom: 0
+        @media ($smPlus)
+            display: flex
+            transform: translateX(0)
+            position: static
+        @media ($xs)
+            width: 300px
+        li
+            line-height: unset
+.content
+    position: relative
+    flex-grow: 1
+    max-height: 100%
+    max-width: 100%
+    padding: 1rem 1rem 0
+    display: flex
+    flex-direction: column
+    overflow: hidden
+    @media ($xs)
+        padding-top: 0.3rem
+.header
+    nav
+        .nav-wrapper
+            padding: 0 30px
+        .menu
+            display: flex
+            gap: 15px
+        .mobile
+            @media ($smPlus)
+                display: none
+            &-sidebar-trigger
+                margin-left: 0
+            &-menu-trigger
+                margin-right: 0
+                @media ($smPlus)
+                    display: none
+            &-menu
+                ul
+                    display: flex
+                    flex-direction: column
+                li
+                    order: 10
+                .lang
+                    order: 1
+                    a
+                        display: inline-block
+                .settings
+                    order: 2
+.group-list
+    margin: 0
+    &-wrapper
+        overflow-y: auto
+        height: 100%
+    &__item
+        border: 1px solid #ddd
+        margin: -1px 0
+    &__title
+        cursor: pointer
+        padding: 0.5rem
+        display: flex
+        align-items: center
+        transition: all .3s
+        font-size: 14px
+        img 
+            width: 20px
+            height: 20px
+            margin-right: 0.3rem
+    ul 
+        padding-left: 0.5rem
+        li
+            border: none
+.select
+    display: flex
+    position: relative
+    &__trigger
+        transition: all .3s
+        padding-left: 0.6rem
+        padding-right: 1rem
+        cursor: pointer
+    &__icon
+        position: absolute
+        top: 4px
+        margin-left: 2px
+    &__dropdown
+        padding: 0.5rem
+        label
+            font-size: 16px
+.tab
+    &-nav
+        display: flex
+        span
+            display: inline-block
+            padding: 0.3rem 1rem
+            cursor: pointer
+            transition: all .3s
+.orders-table
+    border-collapse: collapse
+    th, td
+        padding: 0.3rem 1rem
+        border: 1px solid
+        cursor: pointer
+    .station
+        min-width: 200px
+
+.order
+    &__security
+        &_1-0
+            color: #24D7F9
+        &_0-9
+            color: #32E6C3
+        &_0-8
+            color: #02C33E
+        &_0-7
+            color: #02CB03
+        &_0-6
+            color: #78C82A
+        &_0-5
+            color: #FFFF00
+        &_0-4
+            color: #FFA600
+        &_0-3
+            color: #FB6400
+        &_0-2
+            color: #FF5300
+        &_0-1
+            color: #FF4200
+        &_nullsec
+            color: #FF0000
+    &__price 
+        color: #78C82A
+div
+    &::-webkit-scrollbar 
+        width: 5px
+        height: 5px
+.arrow-dropdown 
+    position: relative
+    padding-left: 1rem
+    &::before
+        content: ""
+        display: inline-block
+        margin-left: 0.255em
+        vertical-align: 0.255em
+        border-top: 0.2rem solid
+        border-right: 0.2rem solid transparent
+        border-bottom: 0
+        border-left: 0.2rem solid transparent
+        transform: rotate(-90deg)
+        position: absolute
+        top: 50%
+        left: 0
+        margin-top: -1.4px
+    &.open
+        &::before
+            transform: rotate(0)
+.market-info
+    display: flex
+    gap: 30px
+    @media ($mdMinus)
+        flex-wrap: wrap
+        gap: 1rem
+        justify-content: space-between
+    > div 
+        border: 1px solid
+        padding: 1rem
+        box-sizing: border-box
+.selected-type
+    display: flex
+    gap: 1rem
+    position: relative
+    @media ($mdMinus)
+        border: 0 !important
+        padding: 0.3rem !important
+        width: 100%
+        align-items: center
+    img
+        line-height: normal
+        width: 64px
+        height: 64px
+        @media ($mdMinus)
+            width: 25px
+            height: 25px
+    &__info
+        @media ($mdMinus)
+            width: 100%
+            display: flex
+            flex-wrap: wrap
+    &__volume
+        white-space: nowrap
+    &__title
+        @media ($mdMinus)
+            margin-right: 5px
+    &__description
+        padding: 1rem
+        border: 1px solid
+        max-width: 700px
+.selected-order
+    @media ($mdMinus)
+        width: calc(50% - 0.5rem)
+        font-size: 12px
+    @media ($xs)
+        display: none
+.order-profit
+    position: relative
+    max-width: 100%
+    @media ($mdPlus)
+        min-width: 465px
+    @media ($mdMinus)
+        width: calc(50% - 0.5rem)
+        font-size: 12px
+    @media ($xs)
+        display: none
+    &__trigger
+        height: 12px
+        width: 100%
+        position: absolute
+        bottom: 0
+        left: 0
+        cursor: pointer
+        text-align: center
+        transition: all .3s
+        > i 
+            position: relative
+            top: -6px
+            opacity: 0.4
+    &__dropdown
+        min-width: 100%
+        > div
+            padding: 0.5rem
+            margin: -1px 0
+            cursor: pointer
+.filter
+    margin-top: 1rem
+    display: flex
+    gap: 20px
+    white-space: nowrap
+    @media ($xs)
+        overflow-y: auto
+        height: 40px
+    &::-webkit-scrollbar
+        display: none
+    &-row
+        display: flex
+        gap: 25px
+        > *
+            padding-top: 0.3rem
+            padding-bottom: 0.3rem
+.sort
+    position: relative
+    > i
+        position: absolute
+        top: -2px
+    &--asc
+        > i
+            transform: rotate(180deg)
+.search
+    padding: 1rem
+.input-group
+    line-height: 50px
+    label
+        line-height: 16px
+        font-size: 16px
+    input[type='text'], input[type='number']
+        border: 1px solid
+        padding: 0 1rem
+        box-sizing: border-box
+        margin-bottom: 0
+.scroll
+    &-y
+        height: 100%
+        overflow-y: auto
+[type="checkbox"] + span:not(.lever)
+    padding-left: 30px
+    &:before, &:after
+        transition: none !important
+[type="checkbox"].filled-in
+    &:not(:checked) + span:not(.lever), &:checked + span:not(.lever)
+        &:after, &:before
+            top: 3px
+.preloader
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    background: rgba(0, 0, 0, 0.2)
+    position: absolute
+    left: 0
+    top: 0
+
+label
+    &.checkbox
+        transition: color .3s
+.modal
+    &-header
+        position: absolute
+        width: 100%
+        top: -1px
+        left: 0
+        line-height: 23px !important
+        padding: 0 0 5px
+        i, &__title
+            height: 23px !important
+            line-height: 23px !important
+            font-size: 1rem !important
+            opacity: 0.5
+            margin-right: 5px
+        i
+            position: absolute
+            top: 2px
+            right: 2px
+        &__title
+            text-align: left
+            display: block
+            padding: 2px 0 0 10px
+.config-tax
+    display: flex
+    flex-direction: column
+    gap: 30px
+    padding-top: 24px
+    .input-group
+        display: flex
+        align-items: center
+        label
+            width: 35%
+            margin-right: 5%
+        input
+            width: 60%
+#config-modal
+    max-width: 600px
+.menu-trigger
+    @media ($smPlus)
+        display: none
+
+
+.example-enter
+    opacity: 0.01
+
+.example-enter.example-enter-active
+    opacity: 1
+    transition: opacity 500ms ease-in
+
+.example-exit
+    opacity: 1
+
+.example-exit.example-exit-active
+    opacity: 0.01
+    transition: opacity 300ms ease-in

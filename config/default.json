@@ -1,0 +1,9 @@
+{
+    "port": 5000,
+    "db": {
+        "mongodb": {
+            "host2": "mongodb://localhost:50405/eve",
+            "host": "mongodb://localhost:27017/eve"
+        }
+    }
+}
