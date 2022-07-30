@@ -9,7 +9,7 @@ import _ from 'lodash';
 function MarketGroupList() {
     let isSearch = false;
     const [arMarketGroups, setMarketGroups] = useState([]);
-    const {getOrders} = useContext(MarketContext);
+    const {getOrders, oSelectedType} = useContext(MarketContext);
     const {lang} = useContext(ConfigContext);
     const [api] = useApi();
 
@@ -48,7 +48,8 @@ function MarketGroupList() {
             .uniqBy('mainParentGroup._id')
             .map(item => _.get(item, 'mainParentGroup'))
             .each(oMarketGroup => {
-                oMarketGroup.types = _.filter(response, oType => _.get(oType, ['mainParentGroup', '_id']) === _.get(oMarketGroup, '_id'));
+                oMarketGroup.types = _.filter(response, oType =>
+                    _.get(oType, ['mainParentGroup', '_id']) === _.get(oMarketGroup, '_id'));
             })
             .value()
             setMarketGroups(marketGroups);
@@ -71,7 +72,11 @@ function MarketGroupList() {
         <>
             <Search onInput = { onInputSearchHandler }/>
             <div className = 'group-list-wrapper'>
-                <ListGroupTree items = { arMarketGroups } typeClickHandler={ getOrders }/>
+                <ListGroupTree
+                    items = { arMarketGroups }
+                    typeClickHandler={ getOrders }
+                    selected = { oSelectedType._id }
+                />
             </div>
         </>
     )

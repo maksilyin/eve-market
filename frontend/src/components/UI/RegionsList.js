@@ -18,7 +18,7 @@ function RegionList() {
         if (arSelectedRegions.length === 1) {
             sSelectedRegions = _.get(
                 _.find(regions, oRegion => Number(arSelectedRegions[0]) === oRegion._id),
-                '' + 'name'
+                'name'
             );
         }
         else if (arSelectedRegions.length > 1 && arSelectedRegions.length < regions.length) {

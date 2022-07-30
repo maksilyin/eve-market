@@ -8,7 +8,7 @@ function SelectedOrder({oOrder}) {
     const { t } = useTranslation();
     const price = _.get(oOrder, 'price');
     const count = _.get(oOrder, 'volume_total');
-    const typeTotalVolume = count * _.get(oOrder, ['type', 'volume']);
+    const typeTotalVolume = (count * _.get(oOrder, ['type', 'volume'])).toFixed(2);
     const sum = count * _.get(oOrder, 'price');
 
     return (

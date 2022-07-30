@@ -5,9 +5,6 @@ import useApi from './useApi';
 const storageOrders = localStorage.getItem('orders') ?
     JSON.parse(localStorage.getItem('orders')) : {};
 
-const storageSelectedRegions = localStorage.getItem('selectedRegions') ?
-    JSON.parse(localStorage.getItem('selectedRegions')) : [];
-
 const storageSelectedType = localStorage.getItem('selectedType') ?
     JSON.parse(localStorage.getItem('selectedType')) : {}
 
@@ -46,9 +43,14 @@ const useMarket = () => {
     }, [arOrders, iSelectedOrder])
 
     const getOrders = async(oType) => {
+        if (isLoading) {
+            return;
+        }
+        setSelectedType(oType);
+
         const data = await api('ORDERS', { type_id: _.get(oType, '_id') });
 
-        if (data) {
+        if (!_.isNil(data)) {
             const oOrders = _.keyBy(data, 'order_id');
             localStorage.setItem('orders', JSON.stringify(oOrders));
             localStorage.setItem('selectedType', JSON.stringify(oType));
@@ -61,7 +63,6 @@ const useMarket = () => {
                 .value();
 
             setOrders(oOrders);
-            setSelectedType(oType);
             updateSelectedOrder(iOrderId);
         }
     }

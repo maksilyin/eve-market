@@ -25,8 +25,6 @@ function Menu({id, className}) {
     return (
         <>
             <ul id={ id } className={ className }>
-                <li><Link to="/">{ t('Market') }</Link></li>
-                <li><Link to="/manufacture/">{ t('Manufacture') }</Link></li>
                 <li className="lang">
                     <a ref={ langDropdownTrigger } className="dropdown-trigger" data-target={"lang-dropdown" + id}>
                         {lang.toUpperCase()} <i className="material-icons right">arrow_drop_down</i>

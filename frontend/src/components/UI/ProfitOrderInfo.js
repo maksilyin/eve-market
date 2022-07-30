@@ -16,16 +16,18 @@ function ProfitOrderInfo({selectedOrder, arOrders}) {
     const [selectedProfitOrder, setSelectedProfitOrder] = useState();
 
     const hasProfit = useCallback((price, oOrder) => {
-        const tax = Number(salesTax) + (!_.get(oOrder, 'is_by_order') ? Number(brokerCommission) : 0);
-        oOrder.taxPrice = _.get(oOrder, 'price') - tax / 100 * _.get(oOrder, 'price') - price;
-        
+        const tax = Number(salesTax) + (!_.get(oOrder, 'is_buy_order') ? Number(brokerCommission) : 0);
+        const orderPrice = _.get(oOrder, 'price');
+
+        oOrder.taxPrice = (orderPrice - tax / 100 * orderPrice) - price;
+
         return oOrder.taxPrice > 0;
     }, [brokerCommission, salesTax]);
 
-    const arFirstSystemOrders = (arOrders) => {
+    const arFirstSystemOrdersByPrice = (arOrders, priceSort) => {
         return _
             .chain(arOrders)
-            .orderBy('price', 'asc')
+            .orderBy('price', priceSort)
             .reduce((result, oOrder) => {
                 const iSystemId = _.get(oOrder, 'system_id');
 
@@ -40,8 +42,8 @@ function ProfitOrderInfo({selectedOrder, arOrders}) {
     const profitOrders = useMemo(() => {
         const price = _.get(selectedOrder, 'price');
         const firstOrders = [
-            ...arFirstSystemOrders(_.get(arOrders, 'sell')),
-            ...arFirstSystemOrders(_.get(arOrders, 'buy'))
+            ...arFirstSystemOrdersByPrice(_.get(arOrders, 'sell'), 'asc'),
+            ...arFirstSystemOrdersByPrice(_.get(arOrders, 'buy'), 'desc')
         ];
 
         return _
@@ -51,6 +53,21 @@ function ProfitOrderInfo({selectedOrder, arOrders}) {
             .value();
 
     }, [selectedOrder, arOrders, hasProfit]);
+
+    const profit = useCallback(oOrder => {
+        if (!oOrder) {
+            return 0;
+        }
+        let quantity = volume;
+        const orderQuantity = _.get(oOrder, 'volume_total');
+        const price = _.get(oOrder, 'taxPrice');
+
+        if (_.get(oOrder, 'is_buy_order') && orderQuantity < quantity) {
+            quantity = orderQuantity;
+        }
+
+        return price * quantity;
+    }, [selectedProfitOrder])
 
     useEffect(() => {
         setSelectedProfitOrder(_.head(profitOrders))
@@ -95,7 +112,9 @@ function ProfitOrderInfo({selectedOrder, arOrders}) {
                         </span>)
                     </div>
                     <div>
-                        { t('Profit') }: <Price className='order__price' price = {_.get(selectedProfitOrder, 'taxPrice') * volume} />
+                        { t('Profit') }: <Price
+                            className='order__price'
+                            price = { profit(selectedProfitOrder) } />
                         &nbsp;(<Price price = {_.get(selectedProfitOrder, 'taxPrice')}/> isk/шт.)
                         &nbsp;<span style={{color: _.get(selectedProfitOrder, 'is_buy_order') ? '#02CB03' : 'red'}}>
                             {_.get(selectedProfitOrder, 'is_buy_order') ? 'Buy' : 'Sell'}
@@ -112,7 +131,7 @@ function ProfitOrderInfo({selectedOrder, arOrders}) {
                             <div key={_.get(oOrder, 'order_id')} onClick={ ()=>{setSelectedProfitOrder(oOrder)} }>
                                 <StationName oOrder={oOrder} />
                                 <div>
-                                    { t('Profit') }: <Price className='order__price' price = { _.get(oOrder, 'taxPrice') * volume }/>
+                                    { t('Profit') }: <Price className='order__price' price = { profit(oOrder) }/>
                                     &nbsp;<span style={{color: _.get(oOrder, 'is_buy_order') ? '#02CB03' : 'red'}}>
                                         {_.get(selectedProfitOrder, 'is_buy_order') ? 'Buy' : 'Sell'}
                                     </span>

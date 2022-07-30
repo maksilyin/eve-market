@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useContext} from 'react';
 import M from 'materialize-css'
 import ConfigContext from "../../contexts/configContext";
 import _ from "lodash";
+import ImgType from "./ImgType";
 
 function SelectedType({oType}) {
     const {lang} = useContext(ConfigContext)
@@ -15,20 +16,13 @@ function SelectedType({oType}) {
         });
     }, []);
 
-    const ImgPath = () => {
-        const sPath = `https://images.evetech.net/types/${oType._id}/icon?size=64`;
-        return (
-            <img width='64' src= {sPath} alt="" />
-        )
-    }
-
     return (
         <div
             ref={dropdownTrigger}
             className='selected-type dropdown-trigger'
             data-target='description-dropdown'
         >
-            <ImgPath />
+            <ImgType oType = { oType } size={64} />
             <div className='selected-type__info'>
                 <div className='selected-type__title'>
                     {oType.name[lang]}

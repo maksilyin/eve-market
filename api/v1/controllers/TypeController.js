@@ -9,7 +9,6 @@ module.exports = {
     search: async function(req, res) {
 
         const name = req.query.name;
-        const params = {};
 
         if (!name) {
             res.status(400);

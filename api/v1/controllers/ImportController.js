@@ -272,9 +272,19 @@ module.exports = {
         res.end();
     },
 
-    test: async function(req, res) {
-        const arGroups = importYaml('/sde/fsd/groupIDs.yaml');
-
-        res.json(arGroups);
+    setTypesBp: async function(req, res) {
+        const arBp = importYaml('/sde/fsd/blueprints.yaml');
+        _.each(arBp, async (oBp, iBpId) => {
+            Type.findById(iBpId, (err, oType) => {
+                if (!err) {
+                    if (!_.isUndefined(oType.marketGroupID)) {
+                        oType.blueprint = true;
+                    }
+                    oType.bpc = true;
+                    oType.save();
+                }
+            });
+        });
+        res.json(true);
     }
 };

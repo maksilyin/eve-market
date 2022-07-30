@@ -16,6 +16,11 @@ function OrdersTable() {
     const columns = useMemo(() => {
         return [
             {
+                name: t('Region'),
+                field: 'region_name',
+                width: '15%',
+            },
+            {
                 name: t('System'),
                 field: ['system', 'security_status'],
                 width: '15%',
@@ -53,7 +58,7 @@ function OrdersTable() {
             {
                 name: t('Station'),
                 field: ['station', 'name'],
-                width: '45%',
+                width: '30%',
                 className: 'station',
             },
             {

@@ -22,4 +22,6 @@ router.get('/icons', controller.importIcons);
 
 router.get('/set-main-parent-group', controller.setMainParentMarketGroupIdToType);
 
+router.get('/type-bp', controller.setTypesBp);
+
 module.exports = router

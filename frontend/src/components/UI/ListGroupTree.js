@@ -42,11 +42,19 @@ function ListGroupTree(props) {
         }
     
         if (!_.isNil(item.childrenGroups) && isOpen) {
-            childrenList = <ListGroupTree items = { item.childrenGroups } typeClickHandler={ props.typeClickHandler } />
+            childrenList = <ListGroupTree
+                items = { item.childrenGroups }
+                typeClickHandler={ props.typeClickHandler }
+                selected = { props.selected }
+            />
         }
     
         if (arTypes.length && isOpen) {
-            typesList = <ListTypes items = { arTypes } onClickHandler = { props.typeClickHandler }/>
+            typesList = <ListTypes
+                items = { arTypes }
+                onClickHandler = { props.typeClickHandler }
+                selected = { props.selected }
+            />
         }
     
         return ( 

@@ -7,7 +7,9 @@ const marketGroupRoutes = require('./marketGroupRoutes');
 const orderRoutes = require('./orderRoutes');
 const stationRoutes = require('./stationRoutes');
 
-//router.use('/import/', importRoutes);
+if (process.env.NODE_ENV !== 'production') {
+    router.use('/import/', importRoutes);
+}
 
 router.use('/types/', typeRoutes);
 

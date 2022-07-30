@@ -62,13 +62,13 @@ module.exports = {
 
     getOrdersByType(type_id) {
         return new Promise(async(resolve) => {
-            const arRegions = await Region.find().select('_id').all();
+            const arRegions = await Region.find().select(['_id', 'name']).all();
             let data = [];
 
             const arRequests = _.map(arRegions, oRegion => {
                 return this.requestOrders({
                     type_id,
-                    region_id: _.get(oRegion, '_id'),
+                    oRegion,
                     page: 1,
                     order_type: 'all'
                 });
@@ -91,7 +91,7 @@ module.exports = {
         });
     },
 
-    requestOrders({ region_id, type_id, page, order_type }) {
+    requestOrders({ oRegion, type_id, page, order_type }) {
         return new Promise(async(resolve, reject) => {
             const dataParams = {
                 type_id,
@@ -99,6 +99,7 @@ module.exports = {
                 order_type
             };
             try {
+                const region_id = _.get(oRegion, '_id');
                 const response = await api.request('MARKETS_ORDERS', { region_id }, dataParams);
                 let data = response.data;
                 const pages = Number(response.headers['x-pages']);
@@ -113,6 +114,7 @@ module.exports = {
                     data = _.concat(...data, ..._.map(responses, response => response.data));
                     data = _.map(data, dataItem => {
                         dataItem.region_id = region_id;
+                        dataItem.region_name = _.get(oRegion, 'name');
                         return dataItem
                     });
                     resolve(data);

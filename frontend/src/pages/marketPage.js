@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import MarketContext from '../contexts/marketContext';
 import MarketGroupList from '../components/MarketGroupList';
 import OrdersTable from '../components/OrdersTable';

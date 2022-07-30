@@ -1,18 +1,22 @@
 import React, { useContext } from "react";
 import ConfigContext from "../../contexts/configContext";
+import ImgType from "./ImgType";
 
-function ListTypes({ items, onClickHandler }) {
+function ListTypes({ items, onClickHandler, selected }) {
     const {lang} = useContext(ConfigContext);
 
-    const imgPath = (id, additional = 'icon') => {
-        return `https://images.evetech.net/types/${id}/${additional}?size=32`;
+    const isSelected = (iTypeId) => {
+        return iTypeId === selected;
     }
 
     const list = items.map(oType => {
         return ( 
-        <li className = 'group-list__item' key = { oType._id } >
-            <div className = 'group-list__title' onClick={ () => { onClickHandler(oType) } } >
-                <img src= { imgPath(oType._id) } alt=""/>
+        <li
+            className = 'group-list__item'
+            key = { oType._id }
+        >
+            <div className = {'group-list__title' + (isSelected(oType._id) ? ' selected' : '')} onClick={ () => { onClickHandler(oType) } } >
+                <ImgType oType = { oType } />
                 { oType.name[lang] } 
             </div> 
         </li>
